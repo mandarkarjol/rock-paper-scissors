@@ -26,6 +26,11 @@ function getHumanChoice(){
     
     userInput = prompt("Enter your choice: rock, paper or scissors") // Prompts user for input
 
+    // Abort if user hits cancel
+    if (userInput === null){
+        return
+    }
+
     // Trim white space at the front or back of the input text if any
     userInput = userInput.trim();
 
@@ -39,7 +44,13 @@ function getHumanChoice(){
 
     // Keep prompting if input is not valid
     while(isInputValid === false){
-        userInput = prompt(`Invalid input: You entered "${userInput}". Please enter either rock, paper or scissors exactly without extra spaces, quotes or spelling errors`) 
+        userInput = prompt(`Invalid input: You entered "${userInput}". Please enter either rock, paper or scissors exactly without extra spaces, quotes or spelling errors`)
+        
+        // Abort if user hits cancel
+        if (userInput == null){
+            return
+        }
+
         // Trim white space at the front or back of the input text if any
         userInput = userInput.trim();
         // Convert all input to lower case
@@ -61,7 +72,51 @@ let humanScore = 0;
 
 // Function to play one round
 function playRound(humanChoice, computerChoice){
+    // Abort if user hits cancel
+    if (humanChoice == null){
+        console.log("User aborted");
+        return
+    }
 
+    // Initialize important variable
+    let isATie = false;
+
+    // Compare human choice to computer choice to determine winner, log a useful message and increment corresponding winner's score. Return isAtie as true if round is a tie.
+    if ((humanChoice === "rock") && (computerChoice === "scissors")){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        humanScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "rock") && (computerChoice === "paper")){
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        computerScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "paper") && (computerChoice === "rock")){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        humanScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "paper") && (computerChoice === "scissors")){
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        computerScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "scissors") && (computerChoice === "paper")){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        humanScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "scissors") && (computerChoice === "rock")){
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        computerScore += 1;
+        return isATie;
+    }
+    else{
+        isATie = true;
+        console.log(`Both players chose ${humanChoice}.`)
+        return isATie;
+    }
 }
 
 // Play a game with five rounds and declare winner in the end
