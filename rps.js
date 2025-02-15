@@ -19,16 +19,19 @@ function getComputerChoice(){
 
 // Function to get Human's choice
 function getHumanChoice(){
-    let humanChoice = ""; // Initiate variable to store choice
-    let userInput = ""; // Initiate variable to store user input
-    let isInputValid = false; // Initiate boolean for input validation
+    // Initiate important variables
+    let humanChoice = "";
+    let userInput = "";
+    let isInputValid = false;
     
     userInput = prompt("Enter your choice: rock, paper or scissors") // Prompts user for input
 
     // Trim white space at the front or back of the input text if any
     userInput = userInput.trim();
+
+    // Convert all input to lower case
+    userInput = userInput.toLowerCase();
     
-    // Validate user input
     // Check if input is valid
     if ((userInput === "rock") || (userInput === "paper") || (userInput === "scissors")){
         isInputValid = true; // Sets boolean to true
@@ -36,22 +39,30 @@ function getHumanChoice(){
 
     // Keep prompting if input is not valid
     while(isInputValid === false){
-        userInput = prompt(`Invalid input: You entered "${userInput}". Please enter either rock, paper or scissors exactly without extra spaces, quotes or spelling errors`) // Prompts user for input again  
+        userInput = prompt(`Invalid input: You entered "${userInput}". Please enter either rock, paper or scissors exactly without extra spaces, quotes or spelling errors`) 
+        // Trim white space at the front or back of the input text if any
+        userInput = userInput.trim();
+        // Convert all input to lower case
+        userInput = userInput.toLowerCase();
+
         // Check if input is valid
         if ((userInput === "rock") || (userInput === "paper") || (userInput === "scissors")){
             isInputValid = true; // Sets boolean to true
         } 
     }
     humanChoice = userInput; // Store validated input in variable to return
-    
     return humanChoice    
 }
+
 
 // Declare variables to store Computer and Human scores
 let computerScore = 0;
 let humanScore = 0;
 
 // Function to play one round
+function playRound(humanChoice, computerChoice){
+
+}
 
 // Play a game with five rounds and declare winner in the end
 
