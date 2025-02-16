@@ -137,6 +137,10 @@ function playGame(){
         if (!isATie){
             roundCount += 1;
         }
+        // Exit loop if one of the players is already at 3 wins
+        if (humanScore === 3 || computerScore === 3){
+            break;
+        }
     }
 
     // Log the end of game
