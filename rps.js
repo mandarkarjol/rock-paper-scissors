@@ -16,54 +16,69 @@ function getComputerChoice(){
     return computerChoice;
 };
 
-function getHumanChoice(){
-    let humanChoice = "";
-    let userInput = "";
-    let isInputValid = false;
-    
-    userInput = prompt("Enter your choice: rock, paper or scissors");
-
+function playRound(humanChoice, computerChoice){
     // Abort if user hits cancel
-    if (userInput === null){
+    if (humanChoice == null){
+        console.log("User aborted");
         return;
     };
 
-    // Clean up user input
-    userInput = userInput.trim();
-    userInput = userInput.toLowerCase();
-    
-    // Check if input is valid
-    if ((userInput === "rock") || (userInput === "paper") || (userInput === "scissors")){
-        isInputValid = true;
+    let isATie = false;
+
+    // Compare human choice to computer choice to determine winner, log a useful message and increment corresponding winner's score. Return isAtie as true if round is a tie.
+    if ((humanChoice === "rock") && (computerChoice === "scissors")){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        humanScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "rock") && (computerChoice === "paper")){
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        computerScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "paper") && (computerChoice === "rock")){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        humanScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "paper") && (computerChoice === "scissors")){
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        computerScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "scissors") && (computerChoice === "paper")){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        humanScore += 1;
+        return isATie;
+    }
+    else if ((humanChoice === "scissors") && (computerChoice === "rock")){
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        computerScore += 1;
+        return isATie;
+    }
+    else{
+        isATie = true;
+        console.log(`Both players chose ${humanChoice}.`)
+        return isATie;
     };
-
-    // Keep prompting if input is not valid
-    while(isInputValid === false){
-        userInput = prompt(`Invalid input: You entered "${userInput}". Please enter either rock, paper or scissors exactly without extra spaces, quotes or spelling errors`);
-        
-        // Abort if user hits cancel
-        if (userInput == null){
-            return;
-        };
-
-        // Clean up user input
-        userInput = userInput.trim();
-        userInput = userInput.toLowerCase();
-
-        // Check if input is valid
-        if ((userInput === "rock") || (userInput === "paper") || (userInput === "scissors")){
-            isInputValid = true;
-        }; 
-    };
-    humanChoice = userInput;
-    return humanChoice;    
 };
-
-
 // Declare global variables
 let computerScore = 0;
 let humanScore = 0;
 
+// Add event listener to the RPS buttons to capture human choice and pass to playRound()
+const buttonsDiv = document.querySelector(".human-choice-buttons");
+
+buttonsDiv.addEventListener('click', function(event){
+    const target = event.target;
+    const humanChoice = target.className;
+    // Only call playRound if user clicks one of the buttons and not anywhere around / outside it
+    if (humanChoice !== buttonsDiv.className){
+        playRound(humanChoice,getComputerChoice())
+    }
+});
+
+// A global points counter shall declare the winner and reset the game if any one of the players reaches 3 points first.
 
 
 // Play a game with max. five rounds and declare winner in the end
@@ -145,4 +160,4 @@ function playGame(){
     console.log(`You: ${humanScore} | Computer: ${computerScore}`);
 };
 
-playGame();
+// playGame();
