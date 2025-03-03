@@ -1,6 +1,40 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .game-window{
+    border: solid rgb(183, 207, 244) 2px;
+    border-radius: 25px;
+    padding: 12px;
+    height: 600px;
+    width: 800px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: space-between;
 }
-
+.score-board{
+    background-color: aliceblue;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+}
+.round-status{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.human-choice-buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+}
