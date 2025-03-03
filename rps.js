@@ -25,40 +25,43 @@ function playRound(humanChoice, computerChoice){
 
     let isATie = false;
 
+    // Show round status in the status container
+    const roundStatus = document.querySelector(".round-status > p");
+
     // Compare human choice to computer choice to determine winner, log a useful message and increment corresponding winner's score. Return isAtie as true if round is a tie.
     if ((humanChoice === "rock") && (computerChoice === "scissors")){
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        roundStatus.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
         humanScore += 1;
         return isATie;
     }
     else if ((humanChoice === "rock") && (computerChoice === "paper")){
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        roundStatus.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
         computerScore += 1;
         return isATie;
     }
     else if ((humanChoice === "paper") && (computerChoice === "rock")){
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        roundStatus.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
         humanScore += 1;
         return isATie;
     }
     else if ((humanChoice === "paper") && (computerChoice === "scissors")){
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        roundStatus.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
         computerScore += 1;
         return isATie;
     }
     else if ((humanChoice === "scissors") && (computerChoice === "paper")){
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        roundStatus.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
         humanScore += 1;
         return isATie;
     }
     else if ((humanChoice === "scissors") && (computerChoice === "rock")){
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        roundStatus.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
         computerScore += 1;
         return isATie;
     }
     else{
         isATie = true;
-        console.log(`Both players chose ${humanChoice}.`)
+        roundStatus.textContent = `Both players chose ${humanChoice}.`;
         return isATie;
     };
 };
@@ -74,8 +77,8 @@ buttonsDiv.addEventListener('click', function(event){
     const humanChoice = target.className;
     // Only call playRound if user clicks one of the buttons and not anywhere around / outside it
     if (humanChoice !== buttonsDiv.className){
-        playRound(humanChoice,getComputerChoice())
-    }
+        playRound(humanChoice,getComputerChoice());
+    };
 });
 
 // A global points counter shall declare the winner and reset the game if any one of the players reaches 3 points first.
