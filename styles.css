@@ -17,12 +17,13 @@ body{
 }
 .score-board{
     background-color: aliceblue;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
+    margin-top: 20px;
 }
 .round-status{
     width: 100%;
@@ -37,4 +38,13 @@ body{
     align-items: center;
     justify-content: space-evenly;
     padding: 10px;
+    margin-bottom: 20px;
+}
+button{
+    height: 50px;
+    width: 120px;
+    border-radius: 10px;
+    border-color: white;
+    font-size:medium;
+    background-color: aliceblue;
 }
