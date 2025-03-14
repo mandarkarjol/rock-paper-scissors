@@ -1,3 +1,10 @@
+// Declare global variables
+let computerScore = 0;
+let humanScore = 0;
+
+// Show round status in the status container
+const roundStatus = document.querySelector(".round-status > p");
+
 function getComputerChoice(){
     let computerChoice = "";
     let randomNum = Math.floor(Math.random() * 3); // Generates whole random number between 0 and 2 inclusive 
@@ -24,9 +31,6 @@ function playRound(humanChoice, computerChoice){
     };
 
     let isATie = false;
-
-    // Show round status in the status container
-    const roundStatus = document.querySelector(".round-status > p");
 
     // Compare human choice to computer choice to determine winner, log a useful message and increment corresponding winner's score. Return isAtie as true if round is a tie.
     if ((humanChoice === "rock") && (computerChoice === "scissors")){
@@ -65,9 +69,7 @@ function playRound(humanChoice, computerChoice){
         return isATie;
     };
 };
-// Declare global variables
-let computerScore = 0;
-let humanScore = 0;
+
 
 // Add event listener to the RPS buttons to capture human choice and pass to playRound()
 const buttonsDiv = document.querySelector(".human-choice-buttons");
@@ -79,88 +81,21 @@ buttonsDiv.addEventListener('click', function(event){
     if (humanChoice !== buttonsDiv.className){
         playRound(humanChoice,getComputerChoice());
     };
+    // Display updates to the score board
+    const computerScoreElement = document.querySelector(".computer-score");
+    const humanScoreElement = document.querySelector(".human-score");
+    computerScoreElement.textContent = computerScore;
+    humanScoreElement.textContent = humanScore;
+
+    // Reset the game if any one of the players reaches 3 points first.
+    if (computerScore === 3 || humanScore === 3){
+        if (computerScore > humanScore){
+            roundStatus.textContent = 'Game Over, you lost 😭. Make a choice to start a new game.';
+        }
+        else {
+            roundStatus.textContent = 'Game Over, you won! 🎉. Make a choice to start a new game.';
+        };
+        computerScore = 0;
+        humanScore = 0; 
+    };
 });
-
-// A global points counter shall declare the winner and reset the game if any one of the players reaches 3 points first.
-
-
-// Play a game with max. five rounds and declare winner in the end
-function playGame(){
-    function playRound(humanChoice, computerChoice){
-        // Abort if user hits cancel
-        if (humanChoice == null){
-            console.log("User aborted");
-            return;
-        };
-
-        let isATie = false;
-
-        // Compare human choice to computer choice to determine winner, log a useful message and increment corresponding winner's score. Return isAtie as true if round is a tie.
-        if ((humanChoice === "rock") && (computerChoice === "scissors")){
-            console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
-            humanScore += 1;
-            return isATie;
-        }
-        else if ((humanChoice === "rock") && (computerChoice === "paper")){
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
-            computerScore += 1;
-            return isATie;
-        }
-        else if ((humanChoice === "paper") && (computerChoice === "rock")){
-            console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
-            humanScore += 1;
-            return isATie;
-        }
-        else if ((humanChoice === "paper") && (computerChoice === "scissors")){
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
-            computerScore += 1;
-            return isATie;
-        }
-        else if ((humanChoice === "scissors") && (computerChoice === "paper")){
-            console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
-            humanScore += 1;
-            return isATie;
-        }
-        else if ((humanChoice === "scissors") && (computerChoice === "rock")){
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
-            computerScore += 1;
-            return isATie;
-        }
-        else{
-            isATie = true;
-            console.log(`Both players chose ${humanChoice}.`)
-            return isATie;
-        };
-    };
-    let roundCount = 0;
-
-    // Play a round needs to be called until round counter reaches 5 or either player reaches 3 wins
-    while (roundCount < 5){
-        const isATie = playRound(getHumanChoice(),getComputerChoice());
-        // End game if user hits cancel on a prompt
-        if (isATie == null){
-            return
-        };
-        if (!isATie){
-            roundCount += 1;
-        };
-        if (humanScore === 3 || computerScore === 3){
-            break;
-        };
-    };
-
-    // Log the end of game
-    console.log("\n\nGame Over")
-
-    // Declare the winner
-    if (humanScore > computerScore){
-        console.log("Yay, you won!")
-    }
-    else {
-        console.log("Alas, the computer has won.")
-    };
-    // Show scores
-    console.log(`You: ${humanScore} | Computer: ${computerScore}`);
-};
-
-// playGame();
